@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  .narrow-box {
+    position: relative;
+    width: 220px;
+    height: 50px;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  .narrow-box:hover {
+    border-color: orange;
+  }
+
+  .white-text {
+    color: #ffffff;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+  }
+
+  .narrow-box + .narrow-box {
+    margin-left: 20px;
+  }
+
+  .content {
+    display: none;
+    margin-top: 20px;
+    font-size: 18px;
+    color: orange;
+  }
+</style>
+<style>
+/* 针对 Webkit（Chrome、Safari等）浏览器 */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: orange;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: darkorange;
+}
+</style>
+<style>
+  /* 自定义滑动条样式 */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    background: #f39c12; /* 橙色背景 */
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #f39c12; 
+    cursor: pointer;
+  }
+
+  input[type="range"]:hover {
+    opacity: 1;
+  }
+</style>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #111111;
+  }
+  
+  #sidebar {
+    width: 200px;
+    height: 100%;
+    background-color: #000000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  #sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  #sidebar a:hover {
+    background-color: #f90;
+    color: white;
+  }
+  
+  .category {
+    font-size: 18px;
+    color: #f90;
+    padding: 10px 15px;
+    margin-top: 10px;
+  }
+  
+  #content {
+    margin-left: 250px;
+    padding: 40px;
+  }
+  
+  .welcome-box {
+    background-color: #000000;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  
+  .faq-box {
+    background-color: #000000;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 2px solid transparent; /* 初始边框为透明 */
+    transition: border-color 0.3s; /* 边框颜色过渡效果 */
+  }
+  
+  .faq {
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .answer {
+    display: none;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  .faq-box:hover {
+    border-color: #f90; /* 鼠标悬停时边框颜色为橙色 */
+  }
+</style>
+<style>
+  .orange-button {
+    background-color: orange;
+    color: white;
+    padding: 5px 300px;
+    border: none;
+    border-radius: 5px; /* 调整圆角大小 */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .code {
+    display: none;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div id="sidebar">
+  <div class="category">面板</div>
+  <a href="https://64e71fccdb308.site123.me/">Home</a>
+</div>
+
+<div id="content">
+  <div class="welcome-box">
+    <h2>Spray</h2>
+<button id="button" class="orange-button" onclick="showCode()">销毁注入</button>
+状态:<span class="client-status offline-status float-xs-left" id="status-offline"><span style="color:red">离线</span>
+<span class="client-status online-status float-xs-left" id="status-online" style="display: none"><span style="color:green">在线</span>
+  </div>
+  <body>
+  <div class="container">
+    <div class="narrow-box" onclick="showContent(1)"> 
+      <p class="white-text">Combat</p>
+    </div>
+    <div class="narrow-box" onclick="showContent(2)">
+      <p class="white-text">Movement</p>
+    </div>
+    <div class="narrow-box" onclick="showContent(3)"> 
+      <p class="white-text">Misc</p>
+    </div>
+    <div class="narrow-box" onclick="showContent(4)"> 
+      <p class="white-text">Other settings</p>
+    </div>
+  </div>
+
+  <div class="content" id="content1">
+  <div class="faq-box">
+    <div class="faq" onclick="toggleAnswer(this)">Clicker</div>
+    <div class="answer">CPS
+  <input type="range" min="0" max="30" value="16">
+BPS
+  <input type="range" min="0" max="20" value="6"></div>
+  </div>
+  
+  <div class="faq-box">
+    <div class="faq" onclick="toggleAnswer(this)">Aim Assist</div>
+    <div class="answer">Speed
+  <input type="range" min="0" max="100" value="100">
+Range
+  <input type="range" min="0" max="360" value="180"></div>
+  </div>
+
+  <div class="faq-box">
+    <div class="faq" onclick="toggleAnswer(this)">Reach</div>
+    <div class="answer">Min range
+  <input type="range" min="0" max="10" value="3.1">
+Max range
+  <input type="range" min="0" max="10" value="3.5"></div>
+  </div></div>
+  <div class="content" id="content2">
+  <div class="faq-box">
+    <div class="faq" onclick="toggleAnswer(this)">Fake Delay</div>
+    <div class="answer">Delay
+  <input type="range" min="0" max="100" value="70">
+Employer
+  <input type="range" min="0" max="1000" value="100">
+TAB Delay
+  <input type="range" min="0" max="1000" value="100"></div>
+  </div>
+    <div class="faq-box">
+    <div class="faq" onclick="toggleAnswer(this)">Distance control</div>
+    <div class="answer">Delay
+  <input type="range" min="0" max="100" value="1">
+Range
+  <input type="range" min="0" max="5" value="2">
+Y
+  <input type="range" min="0" max="100" value="0">
+Z
+  <input type="range" min="0" max="100" value="0"></div>
+  </div>
+  <div class="faq-box">
+    <div class="faq" onclick="toggleAnswer(this)">Location mapping</div>
+    <div class="answer">Speed
+  <input type="range" min="0" max="100" value="100">
+Range
+  <input type="range" min="0" max="64" value="64"></div>
+  </div></div>
+  <div class="content" id="content3">
+
+
+  <div class="faq-box">
+    <div class="faq" onclick="toggleAnswer(this)">Anti-Bot</div>
+    <div class="answer">
+Range
+  <input type="range" min="0" max="360" value="360"></div>
+  </div>
+</div>
+  <div class="content" id="content4">
+
+  <div class="faq-box">
+    <div class="faq" onclick="toggleAnswer(this)">Friends</div>
+    <div class="answer">
+</div>
+  </div>
+</div>
+  <script>
+    function showContent(contentId) {
+      // 隐藏所有内容
+      var allContent = document.querySelectorAll('.content');
+      allContent.forEach(function(content) {
+        content.style.display = 'none';
+      });
+
+      // 显示特定内容
+      var selectedContent = document.getElementById('content' + contentId);
+      selectedContent.style.display = 'block';
+    }
+  </script>
+
+  
+
+  
+</div>
+
+<script>
+  function toggleAnswer(element) {
+    var answer = element.nextElementSibling;
+    if (answer.style.display === 'block') {
+      answer.style.display = 'none';
+    } else {
+      answer.style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>
